@@ -143,15 +143,15 @@ bool move (std::vector<obst>& arr, int id, int dir, int step = 1) {
 bool operator == (obst a, obst b) { 
     return (a.begin.x == b.begin.x && a.end.x == b.end.x && a.begin.y == b.begin.y && a.end.y == b.end.y);
 }
-
+        
+std::map<std::string, state> states; // paths to different states of the grid
+std::queue<std::vector<obst>> q; // queue
+std::set<std::string> checked; // the list of grid states that was visited before
+        
 // dfs implemintation to search for the shortest path
 void search (std::vector<obst> arr, state& res, obst winpos, int maxlen) {
-    std::map<std::string, state> states; // paths to different states of the grid
-    std::queue<std::vector<obst>> q; // queue
-    std::set<std::string> checked; // the list of grid states that was visited before
-
     q.push(arr); // fill the queue 
-
+        
     while (!q.empty()) {
         std::vector<obst> curr = q.front(); q.pop(); // get the current grid state
         
