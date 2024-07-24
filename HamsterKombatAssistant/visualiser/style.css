@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin: 0 auto;
+
+    div {
+        width: 100%;
+        display: flex;
+        div{ width: 100px;
+        height: 100px;
+            border: 1px solid black;
+            margin: 5px;
+        }
+        
+    }
+}
+
+.v, .v.rounded {
+    background: lightcoral;
+}
+
+.h, .h.rounded {
+    background: lightgreen;
+}
+
+.k, .k.rounded {
+    background: yellow;
+}
+
+.e {
+    background: lightgray;
+}
+
+.lr {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.lr::after {
+    content: "";
+    position: relative;
+    left: 100px;
+    padding: 10px;
+    background: inherit;
+}
+
+.rr {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.rr::after {
+    content: "";
+    position: relative;
+    right: 15px;
+    padding: 10px;
+    background: inherit;
+}
+
+.ur {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.ur::after {
+    content: "";
+    position: relative;
+    top: 20px;
+    padding: 50px;
+    background: inherit;
+}
+
+.dr {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.dr::after {
+    content: "";
+    position: relative;
+    bottom: 20px;
+    padding: 50px;
+    background: inherit;
+}
+
+.rounded {
+    border-radius: 20px;
+    background: inherit;
+}
+
+.dummy.h::after {
+    content: "";
+    padding: 50px;
+    left: -50px;
+    position: relative;
+    background: inherit;
+}
+
+.dummy.h::before {
+    content: "";
+    padding: 50px;
+    position: relative;
+    right: 50px;
+    background: inherit;
+}
+
+.dummy.v::after {
+    content: "";
+    padding: 50px;
+    left: -100px;
+    position: relative;
+    background: inherit;
+    bottom: 50px;
+}
+
+.dummy.v::before {
+    content: "";
+    padding: 50px;
+    top: 50px;
+    position: relative;
+    background: inherit;
+}
+
+input {
+    width: 200px;
+    height: 100px;
+    font-size: 24px;
+}
