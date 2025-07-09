@@ -1,12 +1,12 @@
 let prev = null
 
 class obst {
-    constructor (a,b,c,d,iskey = false) {
+    constructor(a, b, c, d, iskey = false) {
         this.x1 = a
         this.y1 = b
         this.x2 = c
         this.y2 = d
-        
+
         this.iskey = iskey
 
         if (a == c) {
@@ -29,20 +29,20 @@ class obst {
 
     }
 
-    fc () {
+    fc() {
         if (this.iskey) return "k";
         if (this.horizontal) return "h";
         else return "v";
     }
 
-    tos () {
+    tos() {
         return `${this.x1}${this.y1}${this.x2}${this.y2}`
     }
 }
 
 let blocks = []
 
-document.addEventListener("DOMContentLoaded", () =>{
+document.addEventListener("DOMContentLoaded", () => {
     let container = document.querySelector(".container")
 
     function creategrid() {
@@ -56,25 +56,25 @@ document.addEventListener("DOMContentLoaded", () =>{
             let obj = blocks[i]
             for (let j = obj.x1; j <= obj.x2; j++) {
                 for (let k = obj.y1; k <= obj.y2; k++) {
-                    if ((j==obj.x2 && k == obj.y2) || (j==obj.x1 && k == obj.y1)) {
+                    if ((j == obj.x2 && k == obj.y2) || (j == obj.x1 && k == obj.y1)) {
                         if (obj.x1 == obj.x2 && obj.y1 == obj.y2) grid[k][j] = obj.fc() + " rounded"
                         else {
                             if (obj.horizontal) {
-                                if (j == obj.x1) grid[k][j] = "lr " +  (obj.iskey ? "k" : "h")
-                                if (j == obj.x2) grid[k][j] = "rr " +  (obj.iskey ? "k" : "h")
+                                if (j == obj.x1) grid[k][j] = "lr " + (obj.iskey ? "k" : "h")
+                                if (j == obj.x2) grid[k][j] = "rr " + (obj.iskey ? "k" : "h")
                             } else {
-                                if (k == obj.y1) grid[k][j] = "ur " +  (obj.iskey ? "k" : "v")
-                                if (k == obj.y2) grid[k][j] = "dr " +  (obj.iskey ? "k" : "v")
+                                if (k == obj.y1) grid[k][j] = "ur " + (obj.iskey ? "k" : "v")
+                                if (k == obj.y2) grid[k][j] = "dr " + (obj.iskey ? "k" : "v")
                             }
                         }
-                       
-                    }else grid[k][j] = "dummy " + obj.fc()
+
+                    } else grid[k][j] = "dummy " + obj.fc()
                 }
             }
         }
 
         return grid;
-    }   
+    }
 
     function draw() {
         grid = creategrid()
@@ -95,31 +95,40 @@ document.addEventListener("DOMContentLoaded", () =>{
                     }
                 })
 
-            } 
+            }
         }
     }
 
-    function ex() {
-        let res = ""
-        
-        for (let i = 0; i < blocks.length; i++) res += blocks[i].tos();
+    async function ex() {
+        let res = "";
 
-        // navigator.clipboard.writeText(res)
-        console.log(res)
+        for (let i = 0; i < blocks.length; i++) {
+            res += blocks[i].tos();
+        }
+
+        console.log(res);
 
         const file = new Blob([res], { type: "text/plain" });
         const url = URL.createObjectURL(file);
         const a = document.createElement("a");
         a.href = url;
         a.download = "HamsterKombatAssistantInitData.txt";
-        a.click();
+
+        await new Promise((resolve) => {
+            a.addEventListener('click', () => {
+                setTimeout(resolve, 100);
+            }, { once: true });
+
+            a.click();
+        });
 
         setTimeout(() => {
-            window.close()
-        }, 500)
+            URL.revokeObjectURL(url);
+            window.close();
+        }, 400); 
     }
 
     draw()
 
-    document.querySelector("#btn").addEventListener("click",  () => {ex()})
+    document.querySelector("#btn").addEventListener("click", async () => { await ex() })
 })

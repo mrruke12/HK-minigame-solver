@@ -2,6 +2,8 @@
 
 This C++ script automates the solving of mini-games from Hamster Kombat by utilizing two local HTML files to input initial grid data and visualize the solution.
 
+![Preview](./preview.gif)
+
 ## How to Use
 
 Before the first run, configure the necessary parameters in the `config.exe` file as follows:
